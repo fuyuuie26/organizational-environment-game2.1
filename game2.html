@@ -1,0 +1,1514 @@
+<title>Organizational Environment Quiz 🎮</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #ff6b6b,
+        #ffd93d,
+        #6bcB77,
+        #4d96ff,
+        #9b5de5
+    );
+
+    background-size: 400% 400%;
+    animation: backgroundMove 10s ease infinite;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+@keyframes backgroundMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.game {
+    width: 920px;
+    max-width: 100%;
+
+    background: rgba(255,255,255,0.95);
+
+    border-radius: 30px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.3);
+
+    border: 5px solid white;
+}
+
+/* START SCREEN */
+
+.start-screen {
+    text-align: center;
+}
+
+.logo {
+    font-size: 80px;
+
+    animation: bounce 1.5s infinite alternate;
+}
+
+@keyframes bounce {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+h1 {
+    font-size: 42px;
+
+    margin: 10px 0;
+
+    color: #4c1d95;
+}
+
+.subtitle {
+    font-size: 20px;
+
+    color: #64748b;
+
+    font-weight: bold;
+}
+
+.start-button {
+
+    background: #ffcc00;
+
+    border: none;
+
+    border-radius: 20px;
+
+    padding: 18px 40px;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 7px 0 #d39d00;
+
+    transition: 0.2s;
+
+    margin-top: 20px;
+}
+
+.start-button:hover {
+
+    transform: translateY(-4px);
+
+}
+
+.start-button:active {
+
+    transform: translateY(4px);
+
+    box-shadow: 0 3px 0 #d39d00;
+}
+
+
+/* QUIZ */
+
+.quiz-screen {
+    display: none;
+}
+
+.top-bar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.badge {
+
+    background: #eef2ff;
+
+    padding: 10px 16px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+
+    color: #312e81;
+}
+
+.progress {
+
+    width: 100%;
+
+    height: 14px;
+
+    background: #e2e8f0;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-bottom: 25px;
+}
+
+.progress-bar {
+
+    height: 100%;
+
+    width: 0%;
+
+    background: linear-gradient(
+        90deg,
+        #ff6b6b,
+        #ffd93d,
+        #6bcB77,
+        #4d96ff
+    );
+
+    transition: 0.4s;
+}
+
+.question-box {
+
+    background: linear-gradient(
+        135deg,
+        #fdf2f8,
+        #e0f2fe
+    );
+
+    padding: 25px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    border: 4px solid #ddd6fe;
+}
+
+.question-number {
+
+    color: #7c3aed;
+
+    font-weight: bold;
+
+    font-size: 18px;
+}
+
+.question {
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    line-height: 1.4;
+
+    color: #172554;
+
+    margin-top: 12px;
+}
+
+
+/* ANSWERS */
+
+.answers {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+.answer {
+
+    border: none;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    min-height: 80px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    color: #172554;
+
+    transition: 0.2s;
+
+    box-shadow: 0 6px 0 rgba(0,0,0,0.18);
+}
+
+.answer:nth-child(1) {
+
+    background: #ff9f9f;
+}
+
+.answer:nth-child(2) {
+
+    background: #ffe66d;
+}
+
+.answer:nth-child(3) {
+
+    background: #7bed9f;
+}
+
+.answer:nth-child(4) {
+
+    background: #70a1ff;
+}
+
+.answer:hover {
+
+    transform: translateY(-5px) rotate(-1deg);
+
+}
+
+.answer.correct {
+
+    background: #22c55e !important;
+
+    color: white;
+
+    animation: correctAnimation 0.5s;
+}
+
+.answer.wrong {
+
+    background: #ef4444 !important;
+
+    color: white;
+
+    animation: wrongAnimation 0.4s;
+}
+
+@keyframes correctAnimation {
+
+    50% {
+
+        transform: scale(1.08) rotate(2deg);
+
+    }
+}
+
+@keyframes wrongAnimation {
+
+    25% {
+
+        transform: translateX(-10px);
+
+    }
+
+    50% {
+
+        transform: translateX(10px);
+
+    }
+
+    75% {
+
+        transform: translateX(-7px);
+
+    }
+}
+
+
+/* FEEDBACK */
+
+.feedback {
+
+    text-align: center;
+
+    min-height: 40px;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    margin-top: 18px;
+
+}
+
+.next-container {
+
+    text-align: center;
+
+    margin-top: 15px;
+}
+
+.next-button {
+
+    border: none;
+
+    border-radius: 18px;
+
+    padding: 15px 35px;
+
+    background: #8b5cf6;
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 6px 0 #6d28d9;
+
+}
+
+.next-button:hover {
+
+    transform: translateY(-3px);
+
+}
+
+
+/* RESULT */
+
+.result-screen {
+
+    display: none;
+
+    text-align: center;
+}
+
+.result-emoji {
+
+    font-size: 80px;
+
+    animation: bounce 1s infinite alternate;
+}
+
+.final-score {
+
+    font-size: 80px;
+
+    font-weight: bold;
+
+    color: #7c3aed;
+}
+
+.result-message {
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    color: #334155;
+
+    margin: 20px;
+}
+
+.restart-button {
+
+    border: none;
+
+    border-radius: 20px;
+
+    padding: 17px 35px;
+
+    background: #ffcc00;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:650px) {
+
+    .answers {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .question {
+
+        font-size: 22px;
+
+    }
+
+    h1 {
+
+        font-size: 30px;
+
+    }
+
+    .game {
+
+        padding: 20px;
+
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="game">
+
+
+<!-- ================= START SCREEN ================= -->
+
+<div id="startScreen" class="start-screen">
+
+    <div class="logo">
+        🏢🤪🎮
+    </div>
+
+    <h1>
+        Organizational Environment
+    </h1>
+
+    <p class="subtitle">
+        Chapter 3 • Fun Quiz Challenge
+    </p>
+
+    <p>
+        🎯 12 Questions
+        <br>
+        🔊 Funny Sounds
+        <br>
+        🌈 Colorful Answers
+    </p>
+
+    <p>
+        Are you ready to become the
+        <b>CEO of Organizational Environment?</b> 😂
+    </p>
+
+    <button
+        class="start-button"
+        onclick="startGame()">
+
+        🚀 START GAME
+
+    </button>
+
+</div>
+
+
+
+<!-- ================= QUIZ SCREEN ================= -->
+
+<div id="quizScreen" class="quiz-screen">
+
+
+<div class="top-bar">
+
+    <div class="badge">
+
+        📚 Question
+        <span id="questionNumber">
+            1/12
+        </span>
+
+    </div>
+
+    <div class="badge">
+
+        ⭐ Score:
+        <span id="score">
+            0
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="progress">
+
+    <div
+        id="progressBar"
+        class="progress-bar">
+    </div>
+
+</div>
+
+
+<div class="question-box">
+
+    <div class="question-number">
+
+        CHAPTER 3
+
+    </div>
+
+    <div
+        id="question"
+        class="question">
+    </div>
+
+</div>
+
+
+<div
+    id="answers"
+    class="answers">
+</div>
+
+
+<div
+    id="feedback"
+    class="feedback">
+</div>
+
+
+<div class="next-container">
+
+    <button
+        id="nextButton"
+        class="next-button"
+        onclick="nextQuestion()"
+        style="display:none;">
+
+        NEXT →
+        😎
+
+    </button>
+
+</div>
+
+</div>
+
+
+
+<!-- ================= RESULT SCREEN ================= -->
+
+<div
+    id="resultScreen"
+    class="result-screen">
+
+    <div class="result-emoji">
+
+        🎉🏆🎊
+
+    </div>
+
+    <h1>
+
+        GAME COMPLETE!
+
+    </h1>
+
+    <p>
+
+        Your final score:
+
+    </p>
+
+    <div class="final-score">
+
+        <span id="finalScore">
+            0
+        </span>
+
+        /12
+
+    </div>
+
+
+    <div
+        id="resultMessage"
+        class="result-message">
+    </div>
+
+
+    <button
+        class="restart-button"
+        onclick="restartGame()">
+
+        🔄 PLAY AGAIN
+
+    </button>
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================
+   QUESTIONS
+========================================= */
+
+const questions = [
+
+{
+question:
+"Which of the following is part of the external environment?",
+
+answers: [
+
+"Organizational culture",
+
+"Customers",
+
+"Company values",
+
+"Management style"
+
+],
+
+correct: 1
+
+},
+
+
+{
+question:
+"What do suppliers provide to an organization?",
+
+answers: [
+
+"Only customers",
+
+"Raw materials, equipment and services",
+
+"Company culture",
+
+"Mission and vision"
+
+],
+
+correct: 1
+
+},
+
+
+{
+question:
+"Coca-Cola vs. Pepsi is an example of...",
+
+answers: [
+
+"Customers",
+
+"Suppliers",
+
+"Competitors",
+
+"Employees"
+
+],
+
+correct: 2
+
+},
+
+
+{
+question:
+"Starbucks adds more low-sugar drinks because customers want healthier choices. This shows the impact of...",
+
+answers: [
+
+"Customers",
+
+"Suppliers",
+
+"Organizational structure",
+
+"Resources"
+
+],
+
+correct: 0
+
+},
+
+
+{
+question:
+"Which one belongs to the internal environment?",
+
+answers: [
+
+"Government",
+
+"Competitors",
+
+"Employees",
+
+"Customers"
+
+],
+
+correct: 2
+
+},
+
+
+{
+question:
+"What does organizational culture refer to?",
+
+answers: [
+
+"Company's products",
+
+"Shared values, beliefs and attitudes",
+
+"Number of customers",
+
+"Market competition"
+
+],
+
+correct: 1
+
+},
+
+
+{
+question:
+"Environmental uncertainty depends on two dimensions. What are they?",
+
+answers: [
+
+"Price and quality",
+
+"Customers and suppliers",
+
+"Dynamism and complexity",
+
+"Profit and revenue"
+
+],
+
+correct: 2
+
+},
+
+
+{
+question:
+"Dynamism measures...",
+
+answers: [
+
+"How many employees a company has",
+
+"How fast the environment changes",
+
+"How much money the company has",
+
+"How many products the company sells"
+
+],
+
+correct: 1
+
+},
+
+
+{
+question:
+"A small café dealing mainly with customers, suppliers and local competitors has a...",
+
+answers: [
+
+"Complex environment",
+
+"Simple environment",
+
+"Highly unstable environment",
+
+"Global environment"
+
+],
+
+correct: 1
+
+},
+
+
+{
+question:
+"Stable + Simple environment usually creates...",
+
+answers: [
+
+"High uncertainty",
+
+"Low uncertainty",
+
+"Very high complexity",
+
+"Organic structure"
+
+],
+
+correct: 1
+
+},
+
+
+{
+question:
+"Which structure is most suitable for an unstable + complex environment?",
+
+answers: [
+
+"Mechanistic structure",
+
+"Organic structure",
+
+"Fixed structure",
+
+"Centralized structure"
+
+],
+
+correct: 1
+
+},
+
+
+{
+question:
+"Which statement is correct?",
+
+answers: [
+
+"High uncertainty → more organic and flexible",
+
+"High uncertainty → more mechanistic and controlled",
+
+"Low uncertainty → more organic",
+
+"Complexity does not affect uncertainty"
+
+],
+
+correct: 0
+
+}
+
+];
+
+
+/* =========================================
+   GAME VARIABLES
+========================================= */
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let audioContext = null;
+
+
+/* =========================================
+   AUDIO SYSTEM
+========================================= */
+
+function initAudio() {
+
+    if (!audioContext) {
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+    }
+
+    if (
+        audioContext.state ===
+        "suspended"
+    ) {
+
+        audioContext.resume();
+
+    }
+
+}
+
+
+function playTone(
+    frequency,
+    duration,
+    type = "sine",
+    volume = 0.08,
+    delay = 0
+) {
+
+    if (!audioContext)
+        return;
+
+
+    const oscillator =
+        audioContext.createOscillator();
+
+    const gain =
+        audioContext.createGain();
+
+
+    oscillator.type = type;
+
+    oscillator.frequency.value =
+        frequency;
+
+
+    const time =
+        audioContext.currentTime +
+        delay;
+
+
+    gain.gain.setValueAtTime(
+        0.0001,
+        time
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+        volume,
+        time + 0.01
+    );
+
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        time + duration
+    );
+
+
+    oscillator.connect(gain);
+
+    gain.connect(
+        audioContext.destination
+    );
+
+
+    oscillator.start(time);
+
+    oscillator.stop(
+        time +
+        duration +
+        0.03
+    );
+
+}
+
+
+/* Correct answer sound */
+
+function correctSound() {
+
+    initAudio();
+
+    playTone(
+        600,
+        0.1,
+        "sine"
+    );
+
+    playTone(
+        850,
+        0.12,
+        "sine",
+        0.08,
+        0.1
+    );
+
+    playTone(
+        1100,
+        0.18,
+        "sine",
+        0.07,
+        0.22
+    );
+
+}
+
+
+/* Wrong answer = funny sound */
+
+function wrongSound() {
+
+    initAudio();
+
+    playTone(
+        180,
+        0.18,
+        "square",
+        0.07
+    );
+
+    playTone(
+        120,
+        0.25,
+        "square",
+        0.06,
+        0.15
+    );
+
+}
+
+
+/* Start sound */
+
+function startSound() {
+
+    initAudio();
+
+    playTone(
+        523,
+        0.1
+    );
+
+    playTone(
+        659,
+        0.1,
+        "sine",
+        0.08,
+        0.1
+    );
+
+    playTone(
+        784,
+        0.16,
+        "sine",
+        0.08,
+        0.2
+    );
+
+}
+
+
+/* Finish sound */
+
+function finishSound() {
+
+    initAudio();
+
+    const notes = [
+        523,
+        659,
+        784,
+        1047,
+        1319
+    ];
+
+
+    notes.forEach(
+        (frequency,index) => {
+
+            playTone(
+                frequency,
+                0.16,
+                "sine",
+                0.07,
+                index * 0.1
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   START GAME
+========================================= */
+
+function startGame() {
+
+    startSound();
+
+    document
+        .getElementById("startScreen")
+        .style.display = "none";
+
+
+    document
+        .getElementById("quizScreen")
+        .style.display = "block";
+
+
+    showQuestion();
+
+}
+
+
+/* =========================================
+   SHOW QUESTION
+========================================= */
+
+function showQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+
+    document
+        .getElementById("questionNumber")
+        .textContent =
+        `${currentQuestion + 1}/${questions.length}`;
+
+
+    document
+        .getElementById("score")
+        .textContent =
+        score;
+
+
+    document
+        .getElementById("progressBar")
+        .style.width =
+        (
+            currentQuestion /
+            questions.length *
+            100
+        ) + "%";
+
+
+    document
+        .getElementById("question")
+        .textContent =
+        question.question;
+
+
+    const answersContainer =
+        document.getElementById(
+            "answers"
+        );
+
+
+    answersContainer.innerHTML = "";
+
+
+    document
+        .getElementById("feedback")
+        .textContent = "";
+
+
+    document
+        .getElementById("nextButton")
+        .style.display = "none";
+
+
+    question.answers.forEach(
+        (answer,index) => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "answer";
+
+
+            button.textContent =
+                String.fromCharCode(
+                    65 + index
+                ) +
+                ". " +
+                answer;
+
+
+            button.onclick =
+                () =>
+                selectAnswer(
+                    button,
+                    index
+                );
+
+
+            answersContainer
+                .appendChild(
+                    button
+                );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   SELECT ANSWER
+========================================= */
+
+function selectAnswer(
+    button,
+    selectedIndex
+) {
+
+    const question =
+        questions[currentQuestion];
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".answer"
+        );
+
+
+    buttons.forEach(
+        btn =>
+        btn.disabled = true
+    );
+
+
+    if (
+        selectedIndex ===
+        question.correct
+    ) {
+
+        button.classList.add(
+            "correct"
+        );
+
+
+        score++;
+
+
+        correctSound();
+
+
+        document
+            .getElementById(
+                "feedback"
+            )
+            .textContent =
+            "🎉 CORRECT! Your brain is cooking! 🧠🔥";
+
+
+    }
+
+    else {
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        buttons[
+            question.correct
+        ].classList.add(
+            "correct"
+        );
+
+
+        wrongSound();
+
+
+        document
+            .getElementById(
+                "feedback"
+            )
+            .textContent =
+            "😂 OOPS! The correct answer is GREEN!";
+
+    }
+
+
+    document
+        .getElementById("score")
+        .textContent =
+        score;
+
+
+    document
+        .getElementById("nextButton")
+        .style.display =
+        "inline-block";
+
+}
+
+
+/* =========================================
+   NEXT QUESTION
+========================================= */
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion <
+        questions.length
+    ) {
+
+        showQuestion();
+
+    }
+
+    else {
+
+        showResult();
+
+    }
+
+}
+
+
+/* =========================================
+   RESULT
+========================================= */
+
+function showResult() {
+
+    finishSound();
+
+
+    document
+        .getElementById(
+            "quizScreen"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "resultScreen"
+        )
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById(
+            "finalScore"
+        )
+        .textContent =
+        score;
+
+
+    let message;
+
+
+    if (score === 12) {
+
+        message =
+            "🏆 PERFECT! You are the CEO of Organizational Environment!";
+
+    }
+
+    else if (score >= 9) {
+
+        message =
+            "🔥 EXCELLENT! The organizational environment is afraid of you!";
+
+    }
+
+    else if (score >= 6) {
+
+        message =
+            "😎 GOOD JOB! A little review and you'll be unstoppable!";
+
+    }
+
+    else {
+
+        message =
+            "📚 Keep practicing! Even CEOs make mistakes sometimes 😂";
+
+    }
+
+
+    document
+        .getElementById(
+            "resultMessage"
+        )
+        .textContent =
+        message;
+
+}
+
+
+/* =========================================
+   RESTART
+========================================= */
+
+function restartGame() {
+
+    currentQuestion = 0;
+
+    score = 0;
+
+
+    document
+        .getElementById(
+            "resultScreen"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "quizScreen"
+        )
+        .style.display =
+        "block";
+
+
+    showQuestion();
+
+}
+
+</script>
+
+</body>
+</html>
